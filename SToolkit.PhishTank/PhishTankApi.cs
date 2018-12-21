@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 #if !NET35 && !NET40
 using System.Net.Http;
+using System.Threading.Tasks;
 #else
 using System.Text;
 using System.Collections.Specialized;
@@ -102,5 +103,43 @@ namespace SToolkit.PhishTank
             }
             throw new Exception(doc["response"]["results"]["errortext"].FirstChild.Value);
         }
+
+#if !NET35 && !NET40
+        public async Task<PhishResult> CheckAsync(string url)
+        {
+            XmlDocument doc = new XmlDocument();
+            FormUrlEncodedContent content = new FormUrlEncodedContent(new Dictionary<string, string>
+            {
+               { "url", url },
+               { "format", "xml" },
+               { "app_key", Key }
+            });
+            HttpResponseMessage response = await WebClient.PostAsync(ApiUrl, content);
+            doc.Load(new StringReader(response.Content.ReadAsStringAsync().Result));
+            if (doc["response"]["results"]["errortext"] == null)
+            {
+                PhishResult result = new PhishResult
+                {
+                    Url = doc["response"]["results"]["url0"]["url"].FirstChild.Value,
+                    InDatabase = bool.Parse(doc["response"]["results"]["url0"]["in_database"].FirstChild.Value)
+                };
+                if (result.InDatabase)
+                {
+                    if (doc["response"]["results"]["url0"]["phish_id"] != null)
+                        result.PhishID = int.Parse(doc["response"]["results"]["url0"]["phish_id"].FirstChild.Value);
+                    if (doc["response"]["results"]["url0"]["phish_detail_page"] != null)
+                        result.PhishPage = doc["response"]["results"]["url0"]["phish_detail_page"].FirstChild.Value;
+                    if (doc["response"]["results"]["url0"]["verified"] != null)
+                        result.Verified = bool.Parse(doc["response"]["results"]["url0"]["verified"].FirstChild.Value);
+                    if (doc["response"]["results"]["url0"]["verified_at"] != null)
+                        result.VerifiedDate = DateTime.Parse(doc["response"]["results"]["url0"]["verified_at"].FirstChild.Value);
+                    if (doc["response"]["results"]["url0"]["valid"] != null)
+                        result.IsPhish = bool.Parse(doc["response"]["results"]["url0"]["valid"].FirstChild.Value);
+                }
+                return result;
+            }
+            throw new Exception(doc["response"]["results"]["errortext"].FirstChild.Value);
+        }
+#endif
     }
 }

@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>net35;net40;net45;net46;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</TargetFrameworks>
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+    <Authors>StarDev Team</Authors>
+    <Company>StarDev Team</Company>
+    <Description>PhishTank is a free community site where anyone can submit, verify, track and share phishing data.</Description>
+    <PackageProjectUrl>https://github.com/stdevsu/SToolkit.PhishTank</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/stdevsu/SToolkit.PhishTank</RepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
