@@ -12,18 +12,18 @@ PhishTank is a collaborative clearing house for data and information about phish
 ## How to get api key?
 * Register and get it [here](https://www.phishtank.com/api_register.php).
 
-## Supported platforms:
+## Supported platforms.
 * .Net Framework 3.5+.
 * .Net Core 1.0+.
 * Mono.
 
-## Installation
+## Installation.
 Via Nuget.
 ```
 Install-Package SToolkit.PhishTank
 ```
 
-## Usage
+## Usage.
 Including.
 ```
 using SToolkit.PhishTank;
