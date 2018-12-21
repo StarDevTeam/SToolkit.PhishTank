@@ -1,6 +1,6 @@
 # SToolkit.PhishTank
-[![NuGet version](https://badge.fury.io/nu/SToolkit.PhishTank.svg)](https://badge.fury.io/nu/SToolkit.PhishTank)
-[![GitHub version](https://badge.fury.io/gh/stdevsu%2FSToolkit.PhishTank.svg)](https://badge.fury.io/gh/stdevsu%2FSToolkit.PhishTank)
+[![](https://img.shields.io/nuget/v/SToolkit.PhishTank.svg)](https://www.nuget.org/packages/SToolkit.PhishTank)
+[![](https://img.shields.io/nuget/dt/SToolkit.PhishTank.svg)](https://www.nuget.org/packages/SToolkit.PhishTank)
 
 ## What is PhishTank?
 PhishTank is a collaborative clearing house for data and information about phishing on the Internet. Also, PhishTank provides an open API for developers and researchers to integrate anti-phishing data into their applications at no charge.
