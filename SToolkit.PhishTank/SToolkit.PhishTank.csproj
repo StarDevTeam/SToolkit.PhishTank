@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net35;net40;net45;net46;netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</TargetFrameworks>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="if EXIST &quot;$(SolutionDir)\..\Sign\Sign.bat&quot; (&#xD;&#xA;    call &quot;$(SolutionDir)\..\Sign\Sign.bat&quot; $(TargetPath)&#xD;&#xA;)" />
+  </Target>
+
+</Project>
